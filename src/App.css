@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  width: 100%;
+  height: 180px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.word {
+  margin: 5px;
+}
+
+.main-container {
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.letter-container {
+  width: 460px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.counter-container {
+  margin-top: 1%;
+}
+
+.counter-container span {
+  color: red;
+}
+
+.word-container {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 3%;
+}
+
+.showedWord-container {
+  display: none;
+}
+
+.defeat, .win {
+  width: 460px;
+  height: 141px;
+  background-color: #eeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  position: relative;
+}
+
+.defeat div, .win div {
+  height: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.defeat > div:first-child span {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.win > div:first-child span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.defeat div:nth-child(2) div:first-child, .win div:nth-child(2) div:first-child {
+  width: 50%;
+  display: flex;
+  justify-content: space-arround;
+}
+
+.defeat div:nth-child(2) div:nth-child(2), .win div:nth-child(2) div:nth-child(2) {
+  width: 50%;
+  display: flex;
+  justify-content: space-arround;
+}
+
+.defeat div:nth-child(2) div:first-child span span, .win div:nth-child(2) div:first-child span span, .defeat div:nth-child(2) div:nth-child(2) span span, .win div:nth-child(2) div:nth-child(2) span span {
+  color: red;
+}
+
+
+
+.defeat div:nth-child(3) span, .win div:nth-child(3) span {
+  background-color: #000;
+  color: #81D8F7;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}

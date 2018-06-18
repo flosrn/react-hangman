@@ -1,0 +1,213 @@
+.drawing-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.woodenbar-container-header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.woodenbar-container-left {
+  width: 320px;
+  height: 250px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.woodenbar-left {
+  width: 8px;
+  height: 230px;
+  background-color: #000;
+}
+
+.woodenbar-bottom {
+  width: 200px;
+  height: 8px;
+  background-color: #000;
+  margin-left: 100px;
+}
+
+.woodenbar-container-header-left {
+  width: 320px;
+  height: 250px;
+  background-color: transparent;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.woodenbar-top {
+  width: 8px;
+  height: 100px;
+  background-color: #000;
+  margin-top: 40px;
+}
+
+.woodenbar-top2 {
+  width: 300px;
+  height: 8px;
+  background-color: #000;
+  margin-top: 40px;
+  margin-left: -300px;
+}
+
+.woodenbar-top3 {
+  width: 8px;
+  height: 60px;
+  background-color: #000;
+  margin-top: -8px;
+}
+
+
+.drawing-hangman-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.hangman-container {
+  width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hangman-head-container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+}
+
+.hangman-head {
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.hangman-body-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+
+.hangman-body-container-left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.hangman-body-container-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.hangman-body-left, .hangman-body-right {
+  width: 1px;
+  height: 100px;
+  background-color: #000;
+  visibility: hidden;
+}
+
+.hangman-leftHand {
+  width: 2px;
+  height: 70px;
+  background-color: #000;
+  position: absolute;
+  top: -15px;
+  right: 30px;
+  transform: rotate(120deg);
+  visibility: hidden;
+}
+
+.hangman-rightHand {
+  width: 2px;
+  height: 70px;
+  background-color: #000;
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  transform: rotate(-120deg);
+  visibility: hidden;
+}
+
+
+
+.hangman-foot-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+}
+
+.hangman-foot-container-left {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.hangman-foot-container-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.hangman-leftFoot {
+  width: 2px;
+  height: 70px;
+  background-color: #000;
+  position: absolute;
+  top: -13px;
+  right: 23px;
+  transform: rotate(45deg);
+  visibility: hidden;
+}
+
+.hangman-rightFoot {
+  width: 2px;
+  height: 70px;
+  background-color: #000;
+  position: absolute;
+  top: -13px;
+  left: 23px;
+  transform: rotate(-45deg);
+  visibility: hidden;
+}
+
+

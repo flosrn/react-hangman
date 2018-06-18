@@ -1,0 +1,16 @@
+.Container-Header {
+  width: 100%;
+  height: 20px;
+}
+
+.Container-Header div {
+  background-color: red;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.Container-Header span {
+  cursor: pointer;
+}
+
