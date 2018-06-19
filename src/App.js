@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import wordsList from './wordsList';
 import AppHeader from './components/AppHeader/AppHeader';
-import Letters from './components/Letters/Letters';
+import Keyboard from './components/Keyboard/Keyboard';
 import EndGame from './components/EndGame/EndGame';
-import './App.css';
 import Hangman from './components/Hangman/Hangman';
+
+import './App.css';
 
 class App extends Component {
 
@@ -26,61 +28,6 @@ class App extends Component {
   }
 
   state = {
-    letters: [
-      { id: 1, letter: 'A' }, 
-      { id: 2, letter: 'B' },
-      { id: 3, letter: 'C' },
-      { id: 4, letter: 'D' },
-      { id: 5, letter: 'E' },
-      { id: 6, letter: 'F' },
-      { id: 7, letter: 'G' },
-      { id: 8, letter: 'H' },
-      { id: 9, letter: 'I' },
-      { id: 10, letter: 'J' },
-      { id: 11, letter: 'K' },
-      { id: 12, letter: 'L' },
-      { id: 13, letter: 'M' },
-      { id: 14, letter: 'N' },
-      { id: 15, letter: 'O' },
-      { id: 16, letter: 'P' },
-      { id: 17, letter: 'Q' },
-      { id: 18, letter: 'R' },
-      { id: 19, letter: 'S' },
-      { id: 20, letter: 'T' },
-      { id: 21, letter: 'U' },
-      { id: 22, letter: 'V' },
-      { id: 23, letter: 'W' },
-      { id: 24, letter: 'X' },
-      { id: 25, letter: 'Y' },
-      { id: 26, letter: 'Z' }
-    ],
-    wordList: [
-      { id: 1, word: 'CODE'},
-      { id: 2, word: 'PROGRAMMATION'},
-      { id: 4, word: 'GENTILHOMME'},
-      { id: 5, word: 'HERMETIQUE'},
-      { id: 6, word: 'TRAMPOLINE'},
-      { id: 7, word: 'SCAPHANDRE'},
-      { id: 8, word: 'SOULEVEMENT'},
-      { id: 9, word: 'ARCHITECTURE'},
-      { id: 10, word: 'ELECTROMENAGER'},
-      { id: 11, word: 'MONGOLFIERE'},
-      { id: 12, word: 'AVERTISSEMENT'},
-      { id: 13, word: 'DESTRUCTURATION'},
-      { id: 14, word: 'PASSEPORT'},
-      { id: 15, word: 'VETERINAIRE'},
-      { id: 16, word: 'INTELLIGENCE'},
-      { id: 17, word: 'NUCLEAIRE'},
-      { id: 18, word: 'TERASSEMENT'},
-      { id: 19, word: 'AUBERGINE'},
-      { id: 20, word: 'MAMMIFERE'},
-      { id: 21, word: 'ROUCOULER'},
-      { id: 22, word: 'REPUTATION'},
-      { id: 23, word: 'MALHEUREUX'},
-      { id: 24, word: 'POIGNARDER'},
-      { id: 25, word: 'CONTAMINATION'},
-
-    ],
     usedWord: [],
     hiddenWord: [],
     shots: 0,
@@ -122,23 +69,23 @@ class App extends Component {
 
   // Choisi un mot au hasard parmis la liste et place chaque lettre dans un tableau
   chooseWord() {
-    const wordList = [...this.state.wordList];
-    console.log('La liste de mot est: ', wordList);
+    const wordArray = Object.values(wordsList)[0];
+    console.log('La liste de mot est: ', wordArray);
 
-    const listLength = wordList.length;
+    const listLength = wordArray.length;
     console.log('Le nombre de mot dans cette liste est de: ', listLength);
 
-    const randomWord = this.state.wordList[Math.floor(Math.random() * listLength)].word;
+    const randomWord = wordArray[Math.floor(Math.random() * listLength)];
     console.log('Le mot choisi au hasard parmis cette liste est le mot: ', randomWord);
 
     const splittedWord = randomWord.split("");
     console.log('Ce mot transformé en tableau donne: ', splittedWord);
 
-    const arr = new Array(randomWord.length + 1).join("_").split("");
+    const underscoreWord = new Array(randomWord.length + 1).join("_").split("");
 
     this.setState({
       usedWord: splittedWord, 
-      hiddenWord: arr
+      hiddenWord: underscoreWord
     });
   }
 
@@ -212,7 +159,7 @@ class App extends Component {
             }
           })
           console.log('Perdu!');
-          console.log(this.state.usedWord);
+          console.log('Le mot à trouver était le mot: ' + this.state.usedWord);
           this.hiddenWord.current.style.display = 'none';
           this.showedWord.current.style.display = 'block';
         }
@@ -256,21 +203,18 @@ class App extends Component {
       <div className="App">
         <AppHeader />
         <div className="main-container">
-          <div className="letter-container" ref={this.letters}>
-            {this.state.letters.map(( letter, index ) => (
-              <Letters 
-                letter={letter.letter} 
-                index={index}
-                key={letter.id}
-                onClick={this.handleChooseLetter} />
-            ))}
-          </div>
+
+          <Keyboard 
+            letters={this.letters}
+            clicked={this.handleChooseLetter} />
+
           <EndGame 
             gamesWin={this.state.gamesWin} 
             gamesLoose={this.state.gamesLoose}
             reload={this.reload}
             win={this.win}
             defeat={this.defeat} />
+
           <div className="counter-container">
             Nombre d'essais: <span>{this.state.shots}</span>
           </div>
@@ -286,6 +230,7 @@ class App extends Component {
               ))}
             </div>
           </div>
+          
           <Hangman 
             head={this.head} 
             bodyLeft={this.bodyLeft}
