@@ -4,9 +4,11 @@ import wordsList from './wordsList';
 import AppHeader from './components/AppHeader/AppHeader';
 import Keyboard from './components/Keyboard/Keyboard';
 import EndGame from './components/EndGame/EndGame';
+import Word from './components/Word/Word';
 import Hangman from './components/Hangman/Hangman';
 
 import './App.css';
+
 
 class App extends Component {
 
@@ -159,8 +161,6 @@ class App extends Component {
           })
           console.log('Perdu!');
           console.log('Le mot à trouver était le mot: ' + this.state.usedWord);
-          this.hiddenWord.current.style.display = 'none';
-          this.showedWord.current.style.display = 'block';
         }
       })
     }
@@ -186,8 +186,6 @@ class App extends Component {
     this.footLeft.current.style.visibility = 'hidden';
     this.footRight.current.style.visibility = 'hidden';
     this.letters.current.style.display = 'flex';
-    this.hiddenWord.current.style.display = 'block';
-    this.showedWord.current.style.display = 'none';
 
     letters.forEach(i => {
       i.style.backgroundColor = '#fff';
@@ -207,27 +205,23 @@ class App extends Component {
             letters={this.letters}
             clicked={this.handleChooseLetter} />
           
-          {this.state.winStatut || this.state.looseStatut ? <EndGame 
+          { this.state.winStatut || this.state.looseStatut ? 
+          <EndGame 
+            winStatut={this.state.winStatut}
             gamesWin={this.state.gamesWin} 
             gamesLoose={this.state.gamesLoose}
-            reload={this.reload}
-            winStatut={this.state.winStatut} /> : null}
+            reload={this.reload} /> 
+          : null }
 
           <div className="counter-container">
             Nombre d'essais: <span>{this.state.shots}</span>
           </div>
-          <div className="word-container">
-            <div className="hiddenWord-container" ref={this.hiddenWord}>
-              {this.state.hiddenWord.map(( letter, index ) => (
-                <span className="word" key={index+1}>{letter}</span>
-              ))}
-            </div>
-            <div className="showedWord-container" ref={this.showedWord}>
-              {this.state.usedWord.map(( letter, index ) => (
-                <span className="word" key={index+1}>{letter}</span>
-              ))}
-            </div>
-          </div>
+
+          <Word 
+            winStatut={this.state.winStatut} 
+            looseStatut={this.state.looseStatut} 
+            hiddenWord={this.state.hiddenWord}
+            revealedWord={this.state.usedWord} />
 
           <Hangman 
             head={this.head} 

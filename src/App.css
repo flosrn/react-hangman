@@ -69,6 +69,10 @@
   margin-top: 3%;
 }
 
+.word-container span {
+  margin: 5px;
+}
+
 .showedWord-container {
   display: none;
 }
