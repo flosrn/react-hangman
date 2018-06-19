@@ -73,53 +73,50 @@
   display: none;
 }
 
-.defeat, .win {
+.statut-container {
   width: 460px;
   height: 141px;
   background-color: #eeee;
   display: flex;
   justify-content: center;
   align-items: center;
-  display: none;
   position: relative;
 }
 
-.defeat div, .win div {
+.statut{
+  height: 100%;
+  width: 100%;
+}
+
+.statut div {
   height: 33%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.defeat > div:first-child span {
-  font-size: 26px;
-  font-weight: 600;
-}
-
-.win > div:first-child span {
+.statut > div:first-child span {
   font-size: 20px;
   font-weight: 600;
 }
 
-.defeat div:nth-child(2) div:first-child, .win div:nth-child(2) div:first-child {
+.statut div:nth-child(2) div:first-child {
   width: 50%;
   display: flex;
   justify-content: space-arround;
 }
 
-.defeat div:nth-child(2) div:nth-child(2), .win div:nth-child(2) div:nth-child(2) {
+.statut div:nth-child(2) div:nth-child(2) {
   width: 50%;
   display: flex;
   justify-content: space-arround;
 }
 
-.defeat div:nth-child(2) div:first-child span span, .win div:nth-child(2) div:first-child span span, .defeat div:nth-child(2) div:nth-child(2) span span, .win div:nth-child(2) div:nth-child(2) span span {
+.statut div:nth-child(2) div:first-child span span, .statut div:nth-child(2) div:nth-child(2) span span {
   color: red;
 }
 
-
-
-.defeat div:nth-child(3) span, .win div:nth-child(3) span {
+.statut div:nth-child(3) span {
   background-color: #000;
   color: #81D8F7;
   padding: 5px;

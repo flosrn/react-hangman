@@ -21,8 +21,6 @@ class App extends Component {
     this.footLeft = React.createRef();
     this.footRight = React.createRef();
     this.letters = React.createRef();
-    this.win = React.createRef();
-    this.defeat = React.createRef();
     this.hiddenWord = React.createRef();
     this.showedWord = React.createRef();
   }
@@ -36,6 +34,7 @@ class App extends Component {
     gamesPlayed: 0,
     gamesWin: 0,
     gamesLoose: 0,
+    winStatut: false,
     looseStatut: false
   }
 
@@ -63,7 +62,6 @@ class App extends Component {
     if (this.state.shotsFailed === 6) {
       this.footRight.current.style.visibility = 'visible';
       this.letters.current.style.display = 'none';
-      this.defeat.current.style.display = 'inline-block';
     }
   }
 
@@ -90,12 +88,12 @@ class App extends Component {
   }
 
   // En fonction de la lettre choisie par l'utilisateur, indique sa position dans le mot
-  handleChooseLetter = (index) => {
+  handleChooseLetter = (letter, index) => {
     console.log('------------------------------------------------');
 
     const usedWord = [...this.state.usedWord];
 
-    const chosenLetter = this.state.letters[index].letter;
+    const chosenLetter = letter;
     console.log('La lettre clickée par l\'utilisateur est la lettre: ', chosenLetter);
 
     var letterPosition = usedWord.indexOf(chosenLetter);
@@ -133,12 +131,12 @@ class App extends Component {
         if(string.indexOf("_") < 0) {
           this.setState((prevState) => {
             return {
-              gamesWin: prevState.gamesWin + 1
+              gamesWin: prevState.gamesWin + 1,
+              winStatut: true
             }
           })
           console.log('Gagné!');
           this.letters.current.style.display = 'none';
-          this.win.current.style.display = 'inline-block';
         }
       })
       // Si elle ne se trouve pas dans le mot
@@ -155,7 +153,8 @@ class App extends Component {
         if (this.state.shotsFailed === 6) {
           this.setState((prevState) => {
             return {
-              gamesLoose: prevState.gamesLoose + 1
+              gamesLoose: prevState.gamesLoose + 1,
+              looseStatut: true
             }
           })
           console.log('Perdu!');
@@ -174,7 +173,9 @@ class App extends Component {
     this.setState({
       shots: 0,
       shotsWin: 0,
-      shotsFailed: 0
+      shotsFailed: 0,
+      winStatut: false,
+      looseStatut: false
     });
 
     this.head.current.style.visibility = 'hidden';
@@ -185,8 +186,6 @@ class App extends Component {
     this.footLeft.current.style.visibility = 'hidden';
     this.footRight.current.style.visibility = 'hidden';
     this.letters.current.style.display = 'flex';
-    this.win.current.style.display = 'none';
-    this.defeat.current.style.display = 'none';
     this.hiddenWord.current.style.display = 'block';
     this.showedWord.current.style.display = 'none';
 
@@ -207,13 +206,12 @@ class App extends Component {
           <Keyboard 
             letters={this.letters}
             clicked={this.handleChooseLetter} />
-
-          <EndGame 
+          
+          {this.state.winStatut || this.state.looseStatut ? <EndGame 
             gamesWin={this.state.gamesWin} 
             gamesLoose={this.state.gamesLoose}
             reload={this.reload}
-            win={this.win}
-            defeat={this.defeat} />
+            winStatut={this.state.winStatut} /> : null}
 
           <div className="counter-container">
             Nombre d'essais: <span>{this.state.shots}</span>
@@ -230,7 +228,7 @@ class App extends Component {
               ))}
             </div>
           </div>
-          
+
           <Hangman 
             head={this.head} 
             bodyLeft={this.bodyLeft}
