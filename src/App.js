@@ -15,13 +15,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.chooseWord = this.chooseWord.bind(this);
-    this.head = React.createRef();
-    this.bodyLeft = React.createRef();
-    this.bodyRight = React.createRef();
-    this.handLeft = React.createRef();
-    this.handRight = React.createRef();
-    this.footLeft = React.createRef();
-    this.footRight = React.createRef();
     this.letters = React.createRef();
     this.hiddenWord = React.createRef();
     this.showedWord = React.createRef();
@@ -37,35 +30,15 @@ class App extends Component {
     gamesWin: 0,
     gamesLoose: 0,
     winStatut: false,
-    looseStatut: false
+    looseStatut: false,
+    toggleReload: false
   }
 
   componentDidMount() {
-     window.addEventListener('load', this.chooseWord);
+     window.addEventListener('load', this.chooseWord); 
   }
 
-  componentDidUpdate() {
-    if (this.state.shotsFailed === 1) {
-      this.head.current.style.visibility = 'visible';
-    }
-    if (this.state.shotsFailed === 2) {
-      this.bodyLeft.current.style.visibility = 'visible';
-      this.bodyRight.current.style.visibility = 'visible';
-    }
-    if (this.state.shotsFailed === 3) {
-      this.handLeft.current.style.visibility = 'visible';
-    }
-    if (this.state.shotsFailed === 4) {
-      this.handRight.current.style.visibility = 'visible';
-    }
-    if (this.state.shotsFailed === 5) {
-      this.footLeft.current.style.visibility = 'visible';
-    }
-    if (this.state.shotsFailed === 6) {
-      this.footRight.current.style.visibility = 'visible';
-      this.letters.current.style.display = 'none';
-    }
-  }
+
 
   // Choisi un mot au hasard parmis la liste et place chaque lettre dans un tableau
   chooseWord() {
@@ -85,7 +58,7 @@ class App extends Component {
 
     this.setState({
       usedWord: splittedWord, 
-      hiddenWord: underscoreWord
+      hiddenWord: underscoreWord,
     });
   }
 
@@ -102,7 +75,8 @@ class App extends Component {
 
     this.setState((prevState) => {
       return {
-        shots: prevState.shots + 1
+        shots: prevState.shots + 1,
+        toggleReload: false
       }
     });
     const letterClicked = document.querySelectorAll(".letter");
@@ -168,25 +142,18 @@ class App extends Component {
 
   // Relance une partie
   reload = () => {
-    const letters = document.querySelectorAll(".letter");
+    this.letters.current.style.display = 'flex';
 
     this.setState({
       shots: 0,
       shotsWin: 0,
       shotsFailed: 0,
       winStatut: false,
-      looseStatut: false
+      looseStatut: false,
+      toggleReload: !this.state.toggleReload
     });
-
-    this.head.current.style.visibility = 'hidden';
-    this.bodyLeft.current.style.visibility = 'hidden';
-    this.bodyRight.current.style.visibility = 'hidden';
-    this.handLeft.current.style.visibility = 'hidden';
-    this.handRight.current.style.visibility = 'hidden';
-    this.footLeft.current.style.visibility = 'hidden';
-    this.footRight.current.style.visibility = 'hidden';
-    this.letters.current.style.display = 'flex';
-
+    
+    const letters = document.querySelectorAll(".letter");
     letters.forEach(i => {
       i.style.backgroundColor = '#fff';
       i.style.pointerEvents = 'auto';
@@ -194,6 +161,7 @@ class App extends Component {
 
     this.chooseWord();
   }
+
 
   render() {
     return (
@@ -224,13 +192,12 @@ class App extends Component {
             revealedWord={this.state.usedWord} />
 
           <Hangman 
-            head={this.head} 
-            bodyLeft={this.bodyLeft}
-            bodyRight={this.bodyRight}
-            handLeft={this.handLeft}
-            handRight={this.handRight}
-            footLeft={this.footLeft}
-            footRight={this.footRight} />
+            shotsFailed={this.state.shotsFailed}
+            letters={this.letters}
+            winStatut={this.state.winStatut}
+            looseStatut={this.state.looseStatut}
+            toggleReload={this.state.toggleReload} />
+
         </div>
       </div>
     );
