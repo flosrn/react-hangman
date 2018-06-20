@@ -38,8 +38,6 @@ class App extends Component {
      window.addEventListener('load', this.chooseWord); 
   }
 
-
-
   // Choisi un mot au hasard parmis la liste et place chaque lettre dans un tableau
   chooseWord() {
     const wordArray = Object.values(wordsList)[0];
