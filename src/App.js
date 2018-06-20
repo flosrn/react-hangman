@@ -160,7 +160,6 @@ class App extends Component {
     this.chooseWord();
   }
 
-
   render() {
     return (
       <div className="App">
